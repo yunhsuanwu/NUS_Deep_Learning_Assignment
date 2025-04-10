@@ -1,0 +1,11 @@
+name: cloud
+channels:
+- defaults
+dependencies:
+- python=3.8
+- pip
+- pip:
+  - Pillow==8.0.1
+  - numpy==1.19.2
+  - tqdm
+  - requests
