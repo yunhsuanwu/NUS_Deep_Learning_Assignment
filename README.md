@@ -47,6 +47,7 @@ The [Singapore weather website](https://www.nea.gov.sg/corporate-functions/weath
 
 The following images illustrate some expected patches.
 
+<img src="./cloud/imgs/0.png" alt="drawing" width="140"/>
 <img src="./cloud/imgs/1.png" alt="drawing" width="140"/>
 <img src="./cloud/imgs/2.png" alt="drawing" width="140"/>
 <img src="./cloud/imgs/3.png" alt="drawing" width="140"/>
@@ -65,7 +66,8 @@ The following images illustrate some expected patches. You can see the borders o
 <img src="./cloud/imgs/5.png" alt="drawing" width="140"/>
 <img src="./cloud/imgs/6.png" alt="drawing" width="140"/>
 <img src="./cloud/imgs/7.png" alt="drawing" width="140"/>
-<img src="./cloud/imgs/16.png" alt="drawing" width="140"/>
+<img src="./cloud/imgs/8.png" alt="drawing" width="140"/>
+<img src="./cloud/imgs/9.png" alt="drawing" width="140"/>
 
 ### Dataset formatting
 
@@ -81,8 +83,8 @@ The training must be conducted on the NUS HPC cluster (vanda). You can ask up to
 
 The following images illustrate the results of the translation at different epochs (left to right corresponding to epoch 1, 5, 10, 15 and 20).
 
-<img src="./cloud/imgs/epoch001_fake_A.png" alt="drawing" width="112"/>
-<img src="./cloud/imgs/epoch005_fake_A.png" alt="drawing" width="112"/>
-<img src="./cloud/imgs/epoch010_fake_A.png" alt="drawing" width="112"/>
-<img src="./cloud/imgs/epoch015_fake_A.png" alt="drawing" width="112"/>
-<img src="./cloud/imgs/epoch020_fake_A.png" alt="drawing" width="112"/>
+<img src="./cloud/imgs/epoch001_fake_A.png" alt="drawing" width="140"/>
+<img src="./cloud/imgs/epoch005_fake_A.png" alt="drawing" width="140"/>
+<img src="./cloud/imgs/epoch010_fake_A.png" alt="drawing" width="140"/>
+<img src="./cloud/imgs/epoch015_fake_A.png" alt="drawing" width="140"/>
+<img src="./cloud/imgs/epoch020_fake_A.png" alt="drawing" width="140"/>
