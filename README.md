@@ -11,7 +11,6 @@ This project gives you a great autonomy. While it is not intended to be overly d
 ## Deliverables
 
 * You must push your code on GitHub.
-* You must fill the report (add link to your experiment in the cluster)
 
 ## Installation
 
@@ -33,7 +32,7 @@ $ generate_synthetic_clouds_dataset REQUIRED_PARAMETERS
 $ dataset_formatting REQUIRED_PARAMETERS
 ```
 
-The required parameters are specified in each python file in the build_argparser functions.
+The required parameters are specified in each python file in the build_argparser function.
 
 ## TODOs
 
@@ -55,7 +54,7 @@ The following images illustrate some expected patches.
 
 ### Fake cloud image dataset creation
 
-Artificial clouds can be generated using Perlin noise. Perlin noise are used to create smooth, structured textures that resemble the randomness found in nature, making it ideal for synthesizing cloud-like patterns. There are numerous implementations of Perlin noise available using Python. These resources can be freely downloaded and tailored to fit the specific requirements of our application.
+Artificial clouds can be generated using Perlin noise. Perlin noise are used to create smooth, structured textures that resemble the randomness found in nature, making it ideal for synthesizing cloud-like patterns. There are numerous implementations of Perlin noise available online using Python. These resources can be freely downloaded and tailored to fit the specific requirements of our application.
 
 3. Since the real images display country borders in green, we also need to generate borders in our fake images in the form of binary masks. These masks can be created using any image processing software (such as GIMP) or programmatically using Python. It's not necessary for the borders in the fake images to be green initially, as the translation neural network can be trained to convert them into the appropriate green color during the image-to-image translation process. Generate such a mask. To do so, simply select one of your web scrapped image, open it in a image editing software, and isolate the green borders. The output can for example correspond to a single binary image (0 or 255) of size 1024x512.
 
