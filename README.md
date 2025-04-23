@@ -11,6 +11,9 @@ This project gives you a great autonomy. While it is not intended to be overly d
 ## Deliverables
 
 * You must push your code on GitHub.
+* Push on your repo both the *train_opt.txt* and the *log_loss.txt* files that have been generated during the training step.
+* Push also the four .pth files that correspond to the final trained model.
+* Finally, push the mask that you have used to create the synthetic dataset.
 
 ## Installation
 
