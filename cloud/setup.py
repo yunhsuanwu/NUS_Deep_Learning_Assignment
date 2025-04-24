@@ -7,7 +7,7 @@ setup(
     entry_points={
         'console_scripts': {
             'web_scrapping = scripts.web_scrapping:main',
-            'generate_real_clouds_dataset = scripts.generate_synthetic_real_dataset:main',
+            'generate_real_clouds_dataset = scripts.generate_real_clouds_dataset:main',
             'generate_synthetic_clouds_dataset = scripts.generate_synthetic_clouds_dataset:main',
             'dataset_formatting = scripts.dataset_formatting:main',
         }
