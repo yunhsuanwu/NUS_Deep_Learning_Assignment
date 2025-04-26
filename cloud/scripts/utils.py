@@ -12,7 +12,12 @@ def get_filenames(input_dir: str) -> List[str]:
     Returns:
         List[str]: List of image filenames.
     """
-    return NotImplementedError
+    filenames = []
+    for fname in os.listdir(input_dir):
+        if fname.endswith((".png", ".jpg", ".jpeg")):
+            filenames.append(os.path.join(input_dir, fname))
+    return filenames
+
 
 
 def load_image(
@@ -28,7 +33,16 @@ def load_image(
     Returns:
         np.ndarray: Numpy array of the image.
     """
-    return NotImplementedError
+    try:
+        with Image.open(path) as img:
+            img = img.convert(convert)
+            if crop is not None:
+                img = img.crop(crop)
+            return np.array(img)
+    except Exception as e:
+        print(f"Error loading image {path}: {e}")
+        return None
+
 
 
 def patchify(
@@ -42,13 +56,21 @@ def patchify(
     Returns:
         List[np.ndarray]: A list of patches.
     """
-    return NotImplementedError
+    patches = []
+    h, w = img.shape
+    patch_h, patch_w = patch_size
 
+    for i in range(0, h, patch_h):
+        for j in range(0, w, patch_w):
+            patch = img[i:i+patch_h, j:j+patch_w]
+            if patch.shape[0] == patch_h and patch.shape[1] == patch_w:
+                patches.append(patch)
+    return patches
 
 def save_patches(
         patches: List[np.ndarray], 
-        output_dir: str,
-        starting_index: int) -> None:
+        input_file: str,
+        output_dir: str) -> None:
     """Save the synthetic clouds to the output directory.
     Args:
         patches: The list of patches.
@@ -57,4 +79,12 @@ def save_patches(
     Returns:
         None
     """
-    return NotImplementedError
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+
+    base_name = os.path.splitext(os.path.basename(input_file))[0]
+
+    for idx, patch in enumerate(patches):
+        patch_img = Image.fromarray(patch)
+        patch_filename = f"{base_name}_patch_{idx}.png"
+        patch_img.save(os.path.join(output_dir, patch_filename))

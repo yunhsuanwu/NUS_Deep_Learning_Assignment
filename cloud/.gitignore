@@ -1,0 +1,5 @@
+scrape_images/
+processed_images/
+dataset/
+synthetic_clouds_patches/
+dataset.zip

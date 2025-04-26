@@ -51,7 +51,19 @@ def process(
     Returns:
         None
     """
-    return NotImplementedError
+    from utils import load_image, patchify, save_patches
+    import os
+
+    for file in filenames:
+        image = load_image(file, crop)
+        if image is None:
+            print(f"Skipping file due to loading error: {file}")
+            continue
+
+        left, top, right, bottom = crop
+        image_cropped = image[top:bottom, left:right]
+        patches = patchify(image_cropped, patch_size)
+        save_patches(patches, file, output_dir)
 
 
 def main():

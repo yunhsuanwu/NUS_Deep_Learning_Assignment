@@ -40,6 +40,37 @@ def download_images(
     Returns:
         None
     """
+    import os
+    import requests
+    from datetime import datetime, timedelta
+
+    base_url = "https://www.nea.gov.sg/docs/default-source/satelliteimage/BlueMarbleASEAN_"
+    dt = datetime.strptime(start_date, "%Y-%m-%d")
+    end = datetime.strptime(end_date, "%Y-%m-%d")
+    
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+
+    current_time = dt
+    while current_time <= end:
+        for hour in range(0, 24):
+            for minute in [0, 20, 40]:
+                timestamp = current_time.strftime("%Y%m%d") + f"_{hour:02d}{minute:02d}"
+                image_url = f"{base_url}{timestamp}.jpg"
+                save_path = os.path.join(output_dir, f"{timestamp}.jpg")
+
+                try:
+                    response = requests.get(image_url)
+                    if response.status_code == 200:
+                        with open(save_path, "wb") as f:
+                            f.write(response.content)
+                        print(f"✅ Downloaded {timestamp}")
+                    else:
+                        print(f"❌ Not found: {timestamp}")
+                except Exception as e:
+                    print(f"⚠️ Error downloading {timestamp}: {e}")
+        current_time += timedelta(days=1)
+        
     return NotImplementedError
 
 

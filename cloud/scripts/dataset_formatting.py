@@ -2,6 +2,7 @@ from typing import List, Tuple
 import os
 from pathlib import Path
 import argparse
+import random
 
 
 def build_argparser() -> argparse.ArgumentParser:
@@ -41,7 +42,11 @@ def browse_folder(
     """
     Browse a directory and return a list of all the png files in it and its subfolder.
     """
-    return NotImplementedError
+    A_path = path / A
+    B_path = path / B
+    a_files = sorted([p for p in A_path.glob("*.png")])
+    b_files = sorted([p for p in B_path.glob("*.png")])
+    return a_files, b_files
 
 
 def check_existence(
@@ -53,8 +58,9 @@ def check_existence(
     Returns:
         None
     """
-    return NotImplementedError
-
+    for f in filenames:
+        if not f.exists():
+            raise FileNotFoundError(f"Missing file: {f}")
 
 def create_folders(
         input_dir: Path, 
@@ -67,7 +73,9 @@ def create_folders(
     Returns:
         None
     """
-    return NotImplementedError
+    for folder in folder_list:
+        full_path = input_dir / folder
+        full_path.mkdir(parents=True, exist_ok=True)
 
 
 def split_train_test(
@@ -81,7 +89,10 @@ def split_train_test(
     Returns:
         Tuple[List[Path], List[Path]]: Training and testing filenames.
     """
-    return NotImplementedError
+    total = filenames.copy()
+    random.shuffle(total)
+    train_size = int(len(total) * alpha)
+    return total[:train_size], total[train_size:]
 
 
 def create_symlinks(
@@ -97,7 +108,10 @@ def create_symlinks(
     Returns:
         None
     """
-    return NotImplementedError
+    for f in filenames:
+        dest = split_dir / f.name
+        if not dest.exists():
+            os.symlink(f.resolve(), dest)
 
 
 def process(input_dir: str, A: str, B: str, folders: List[str], alpha: float) -> None:
@@ -112,7 +126,20 @@ def process(input_dir: str, A: str, B: str, folders: List[str], alpha: float) ->
     Returns:
         None
     """
-    return NotImplementedError
+    input_path = Path(input_dir)
+    a_files, b_files = browse_folder(input_path, A, B)
+
+    check_existence(a_files + b_files)
+    create_folders(input_path, folders)
+
+    a_train, a_test = split_train_test(a_files, alpha)
+    b_train, b_test = split_train_test(b_files, alpha)
+
+    create_symlinks(a_train, input_path / A, input_path / folders[0])  # trainA
+    create_symlinks(b_train, input_path / B, input_path / folders[1])  # trainB
+    create_symlinks(a_test, input_path / A, input_path / folders[2])   # testA
+    create_symlinks(b_test, input_path / B, input_path / folders[3])   # testB
+
 
 
 def main():
@@ -127,3 +154,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
